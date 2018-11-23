@@ -1,5 +1,11 @@
-FROM python:3.4-alpine
-ADD . /code
-WORKDIR /code
-RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+FROM centos:latest
+
+MAINTAINER Mateusz Chwalczuk
+
+RUN yum -y install httpd
+
+COPY index.html /var/www/html/
+
+CMD [“/usr/sbin/httpd”, “-D”, “FOREGROUND”]
+
+EXPOSE 80
